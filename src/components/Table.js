@@ -14,13 +14,14 @@ const TableHeader = () => {
 }
 
 const TableBody = props => { 
+    console.log("propsBody", props);
     // boilerplate table body functional component 
     // we use Array.map to create table rows from LinkData passed via props
     const rows = props.linkData.map((row, index) => {
         return (
             <tr key={index}>
                 <td>{row.name}</td>
-                <td><a href={row.URL}>{row.URL}</a></td>
+                <td><a href={row.url}>{row.url}</a></td>
                 <td><button onClick={() => props.removeLink(index)}>Delete</button></td>
             </tr>
         );
@@ -31,15 +32,17 @@ const TableBody = props => {
 
 const Table = (props) => {
     const { linkData, removeLink } = props;
+  // console.log(linkData)
+   console.log("propsTable", props);
     {/*TODO - return <table> component, TableHeader and TableBody  */}
-    return (
-    <div>
-    <table>
+return(
+    <tablev>
     <TableHeader/>
-    <TableBody linkData ={linkData}/>
-    </table>
-    </div>
-    );
+    <TableBody linkData={linkData} removeLink={removeLink}/> 
+     
+    </tablev>
+)
+
 }
 
 export default Table;

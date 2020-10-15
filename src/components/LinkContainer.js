@@ -7,33 +7,32 @@ class LinkContainer extends React.Component {
         super(props)
         /* TODO - Create state object for storing favLinks */
         this.state ={
-            favLinks:[
-                {
-                   name: "Google",
-                   URL: "www.google.com"
-                },
-                {
-                   name: "Netflix",
-                   URL: "www.netflix.com",
-                },
-                {
-                    name: "GitHub",
-                    URL:"https://github.com/alimusa970",
-                }
-            ]
+            favLink: []
         }
+        this.removeCharacter = this.removeCharacter.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     removeCharacter = index => {
+        console.log("what is, ",index);
         /*
             TODO - Create logic for setting the state to filter array and remove favLink at index
         */
+       this.setState((prevState) => ({
+   
+       favLink: prevState.favLink.filter((_, i) => i !== index)
+     }));
     }
 
     handleSubmit = favLink => {
+        
         /*
             TODO - Create logic to setState and add new favLink to favLinks array in state
         */
+       // this.setState({favLink:this.state.favLink.push(favLink)});
+       this.setState( prevState => ({
+        favLink: [...prevState.favLink, favLink]
+    }));
     }
 
     render() {
@@ -43,12 +42,14 @@ class LinkContainer extends React.Component {
                 <h1>My Favorite Links</h1>
                 <p>Add a new url with a name and link to the table.</p>
                 {/*TODO - Add Table Component */}
-                <Table linkData ={this.state.favLinks} />
+                <Table removeLink={this.removeCharacter} linkData = {this.state.favLink}/> 
+                
                 <br/>
 
                 <h3>Add New</h3>
                 {/*TODO - Add Form Component */}
-                <Form />
+                <Form handleSubmit = {this.handleSubmit}/>
+                
             </div>
         );
     }
